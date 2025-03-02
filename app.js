@@ -9,7 +9,11 @@ mongoose
 // Defining Fruit Schema
 const fruitSchema = new mongoose.Schema({
   name: String,
-  rating: Number,
+  rating: {
+    type: Number,
+    min: 1,
+    max: 10,
+  },
   review: String,
 });
 
@@ -45,6 +49,13 @@ Fruit.insertMany([kiwi, banana, orange])
   })
   .catch((err) => console.error("Error:", err));
 
+const mango = new Fruit({
+  name: "mango",
+  rating: 9,
+  review: "Wao mangoes",
+});
+mango.save();
+
 // Defining Person Schema
 const personSchema = new mongoose.Schema({
   name: String,
@@ -59,4 +70,4 @@ const person = new Person({
   age: 22,
 });
 
-person.save().then(() => console.log("Person added successfully!"));
+//person.save().then(() => console.log("Person added successfully!"));
