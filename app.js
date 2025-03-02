@@ -76,6 +76,7 @@ const noName = new Fruit({
 
 // Deletion
 Fruit.deleteOne({ name: "Langra" })
+
   .then(() => {
     console.log("Deleted Successfully");
   })
@@ -85,14 +86,25 @@ Fruit.deleteOne({ name: "Langra" })
 const personSchema = new mongoose.Schema({
   name: String,
   age: Number,
+  favFruit: fruitSchema,
 });
 
 const Person = mongoose.model("Person", personSchema);
 
 // Creating and Saving a Person
 const person = new Person({
-  name: "Sajjad",
+  name: "Ahmad",
   age: 22,
+  favFruit: kiwi,
 });
 
 //person.save().then(() => console.log("Person added successfully!"));
+
+//updating old persons fav fruit
+Person.updateOne({ name: "Sajjad" }, { favFruit: banana })
+  .then(() => {
+    console.log("Sajjad's fav fruit added successfully");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
