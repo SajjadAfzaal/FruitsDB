@@ -65,7 +65,21 @@ const noName = new Fruit({
   rating: 9,
   review: "Wao mangoes",
 });
-noName.save();
+//noName.save();
+
+// Updation
+// Fruit.updateOne({ name: "mango" }, { name: "Langra" })
+//   .then(() => {
+//     console.log("Name updated Successfully");
+//   })
+//   .catch((err) => console.error("Error:", err));
+
+// Deletion
+Fruit.deleteOne({ name: "Langra" })
+  .then(() => {
+    console.log("Deleted Successfully");
+  })
+  .catch((err) => console.error("Error:", err));
 
 // Defining Person Schema
 const personSchema = new mongoose.Schema({
