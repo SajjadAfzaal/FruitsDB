@@ -8,7 +8,10 @@ mongoose
 
 // Defining Fruit Schema
 const fruitSchema = new mongoose.Schema({
-  name: String,
+  name: {
+    type: String,
+    required: [true, "Name is necessary"],
+  },
   rating: {
     type: Number,
     min: 1,
@@ -37,24 +40,32 @@ const banana = new Fruit({
 });
 
 // Inserting multiple fruits into the database
-Fruit.insertMany([kiwi, banana, orange])
-  .then(() => {
-    console.log("Fruits inserted successfully!");
-    return Fruit.find(); // Fetch all fruits
-  })
-  .then((fruits) => {
-    console.log("All Fruits in DB:");
-    fruits.forEach((fruit) => console.log(fruit.name)); // Print fruit names
-    mongoose.connection.close(); // Close connection after fetching data
-  })
-  .catch((err) => console.error("Error:", err));
+// Fruit.insertMany([kiwi, banana, orange])
+//   .then(() => {
+//     console.log("Fruits inserted successfully!");
+//     return Fruit.find(); // Fetch all fruits
+//   })
+//   .then((fruits) => {
+//     console.log("All Fruits in DB:");
+//     fruits.forEach((fruit) => console.log(fruit.name)); // Print fruit names
+//     mongoose.connection.close(); // Close connection after fetching data
+//   })
+//   .catch((err) => console.error("Error:", err));
 
+// rating validation check
 const mango = new Fruit({
   name: "mango",
   rating: 9,
   review: "Wao mangoes",
 });
-mango.save();
+//mango.save();
+
+// name required validation check
+const noName = new Fruit({
+  rating: 9,
+  review: "Wao mangoes",
+});
+noName.save();
 
 // Defining Person Schema
 const personSchema = new mongoose.Schema({
